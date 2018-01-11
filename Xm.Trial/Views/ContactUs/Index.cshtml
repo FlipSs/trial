@@ -1,1 +1,29 @@
-﻿<h2>Contact Us</h2>
+﻿@model IEnumerable<Xm.Trial.Models.Data.ContactUsForm>
+
+<div class="container-fluid">
+    <h2>Contact us</h2>
+    <br />
+    <form method="post" enctype="multipart/form-data">
+        <div class="text-danger"></div>
+        <div class="form-group">
+            <input class="form-control" name="Name" autofocus placeholder="Name" required />
+            <span class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="email" name="Email" placeholder="Email" required />
+            <span class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" id="message" name="Message" placeholder="Message text" required></textarea>
+            <span class="text-danger"></span>
+        </div>
+        <div>
+            <label for="Screenshots" id="filesLabel">You can attach screenshots to the message:</label>
+            <input name="Screenshots" type="file" id="files" accept="Image/*" multiple />
+        </div>
+        <br />
+        <div>
+            <input type="submit" value="Send" class="btn btn-success btnRight"/>
+        </div>
+    </form>
+</div>
