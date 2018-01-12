@@ -23,7 +23,7 @@ namespace Xm.Trial.Services
             mailMsg = new MailMessage(appConfig.EmailData.MailAddress, appConfig.EmailData.MailTo);
         }
 
-        public Task SendEmailAsync(string subject, string messageBody, bool isHtmlBody, List<string> attachmentsPaths)
+        public async Task SendEmailAsync(string subject, string messageBody, bool isHtmlBody, List<string> attachmentsPaths)
         {
             mailMsg.Body = messageBody;
             mailMsg.Subject = subject;
@@ -37,9 +37,7 @@ namespace Xm.Trial.Services
                 }
             }
 
-            smtp.Send(mailMsg);
-
-            return Task.FromResult(0);
+            await smtp.SendMailAsync(mailMsg);
         }
     }
 }

@@ -32,15 +32,11 @@ namespace Xm.Trial.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Index(string Name, string Email, string Message, IEnumerable<HttpPostedFileBase> Screenshots)
+        public async Task<ActionResult> Index(ContactUsForm feedbackMsg, IEnumerable<HttpPostedFileBase> screenshots)
         {
-            ContactUsForm feedbackMsg = new ContactUsForm
-            {
-                Name = Name,
-                Email = Email,
-                Message = Message,
-                SentDate = DateTimeOffset.UtcNow
-            };
+            feedbackMsg.SentDate = DateTimeOffset.UtcNow;
+
+            ValidateModel(feedbackMsg);
 
             if (ModelState.IsValid)
             {
@@ -49,13 +45,13 @@ namespace Xm.Trial.Controllers
 
                 List<string> attachmentsPaths = new List<string>();
 
-                if (Screenshots.First() != null)
+                if (screenshots.First() != null)
                 {
                     string directoryName = Server.MapPath(_appConfiguration.ContactUsData.FilesFolder + feedbackMsg.ID + "/");
                     Directory.CreateDirectory(directoryName);
                     feedbackMsg.ScreenshotsPath = directoryName;
 
-                    foreach (var file in Screenshots)
+                    foreach (var file in screenshots)
                     {
                         string fileName = Path.GetFileName(file.FileName);
                         file.SaveAs(directoryName + fileName);
@@ -64,19 +60,15 @@ namespace Xm.Trial.Controllers
                     }
                 }
 
-                string msgBody = _appConfiguration.ContactUsData.MsgBody.Replace("{Name}", Name)
-                    .Replace("{Message}", Message)
-                    .Replace("{Email}", Email);
+                string msgBody = _appConfiguration.ContactUsData.MsgBody.Replace("{Name}", feedbackMsg.Name)
+                    .Replace("{Message}", feedbackMsg.Message)
+                    .Replace("{Email}", feedbackMsg.Email);
 
                 await _mailSender.SendEmailAsync(_appConfiguration.ContactUsData.MsgSubject,
                     msgBody, true, attachmentsPaths);
 
-                if (ModelState.IsValid)
-                {
                     await _context.SaveChangesAsync();
-                    ViewBag.Name = Name;
                     return View("Sent", feedbackMsg);
-                }
             }
 
             return View();

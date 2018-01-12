@@ -15,8 +15,7 @@ namespace Xm.Trial
 
             container.RegisterType<IMailSender, SendMailService>();
             container.RegisterType<DataContext>();
-            container.RegisterInstance(new AppConfiguration(HttpContext.Current.Server.MapPath("appsettings.json")));
-            container.RegisterSingleton<IAppConfiguration, AppConfiguration>();
+            container.RegisterInstance<IAppConfiguration>(new AppConfiguration(HttpContext.Current.Server.MapPath("appsettings.json")));
 
             // register all your components with the container here
             // it is NOT necessary to register your controllers
