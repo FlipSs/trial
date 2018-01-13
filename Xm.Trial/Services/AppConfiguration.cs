@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.IO;
+using Xm.Trial.Services.AppConfigurationData;
 
 namespace Xm.Trial.Services
 {

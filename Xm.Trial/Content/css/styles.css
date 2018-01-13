@@ -9,6 +9,36 @@
     width: 100%;
 }
 
+.go-to{
+    position: fixed;
+    right: 3%;
+    top: 3%;
+}
+
+td{
+    text-align: center;
+    vertical-align:middle;
+    height: 50px;
+}
+
+.pop-up-table-header{
+    text-align: left;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.table
+{
+    font-size: 17px;
+    max-width:80%;
+    width: 80%;
+    margin-left:10%;
+}
+
+.min-column{
+    width: 10%;
+}
+
 .files-label {
     font-weight: 500;
     font-size: 16px;
@@ -64,11 +94,29 @@
     min-height: 60px;
 }
 
+.pop-up-table {
+    animation-name: pop-up-table;
+    animation-duration: 0.25s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+}
+
 @keyframes move {
     from {
         transform: rotateZ(0deg) translateX(15px);
     }
     to {
         transform: rotateZ(360deg) translateX(15px);
+    }
+}
+
+@keyframes pop-up-table{
+    from{
+       transform:translateY(-25%);
+       opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
     }
 }

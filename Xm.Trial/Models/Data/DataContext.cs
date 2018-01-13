@@ -8,5 +8,6 @@ namespace Xm.Trial.Models.Data
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<ContactUsForm> ContactUsForms { get; set; }
+        public DbSet<PostView> PostViews { get; set; }
     }
 }

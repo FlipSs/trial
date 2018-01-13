@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Xm.Trial.Services
+namespace Xm.Trial.Services.AppConfigurationData
 {
     public class MailData
     {

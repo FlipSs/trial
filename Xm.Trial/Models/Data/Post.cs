@@ -26,6 +26,8 @@ namespace Xm.Trial.Models.Data
 
         public int Likes { get; set; }
 
+        public ICollection<PostView> PostView { get; set; }
+
         [ForeignKey(nameof(AuthorId))]
         public Author Author { get; set; }
 

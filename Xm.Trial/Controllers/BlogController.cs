@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using Xm.Trial.Models;
 using Xm.Trial.Models.Data;
+using System;
 
 namespace Xm.Trial.Controllers
 {
@@ -50,8 +51,27 @@ namespace Xm.Trial.Controllers
             return View(viewModel);
         }
 
+        [HttpGet]
         public async Task<ActionResult> Details(int id)
         {
+            Uri refUri;
+            Uri.TryCreate(Request.Headers["Referer"], UriKind.RelativeOrAbsolute, out refUri);
+
+            var postView = await _context.PostViews.FirstOrDefaultAsync(p => p.PostId == id && p.Views == refUri.Host) 
+                ?? new PostView
+            {
+                PostId = id,
+                Views = refUri.Host,
+                Count = 0
+            };
+            postView.Count++;
+            ValidateModel(postView);
+            if (ModelState.IsValid) {
+                if(await _context.PostViews.FirstOrDefaultAsync(p => p.PostId == id && p.Views == refUri.Host) == null)
+                    _context.PostViews.Add(postView);
+                await _context.SaveChangesAsync();
+            }
+
             var post = await _context.Posts
                                 .Select(p => new PostViewModel
                                              {
@@ -73,6 +93,41 @@ namespace Xm.Trial.Controllers
             ViewBag.Title = post.Title;
 
             return View(post);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> PostsStatistic()
+        {
+            var postsStatistics = await _context.Posts
+                                    .Select(p => new PostStatisticViewModel
+                                    {
+                                        ID = p.Id,
+                                        PostView = p.PostView,
+                                        Likes = p.Likes
+                                    })
+                                    .OrderBy(p => p.ID)
+                                    .ToArrayAsync();
+
+            int totalPosts = postsStatistics.Length, totalViews = 0, totalLikes = 0;
+            foreach(var post in postsStatistics)
+            {
+                totalLikes += post.Likes;
+                foreach (var postView in post.PostView)
+                {
+                    post.TotalViews += postView.Count;
+                }
+                totalViews += post.TotalViews;
+            }
+
+            var postsStatisticsModel = new PostsStatisticViewModel
+            {
+                PostStatistic = postsStatistics,
+                TotalPosts = totalPosts,
+                TotalViews = totalViews,
+                TotalLikes = totalLikes
+            };
+
+            return View(postsStatisticsModel);
         }
 
         protected override void Dispose(bool disposing)

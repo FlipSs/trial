@@ -1,4 +1,6 @@
-﻿namespace Xm.Trial.Services
+﻿using Xm.Trial.Services.AppConfigurationData;
+
+namespace Xm.Trial.Services
 {
     public interface IAppConfiguration
     {

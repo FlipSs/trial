@@ -1,0 +1,38 @@
+﻿@model Xm.Trial.Models.PostsStatisticViewModel
+
+<h2>Posts Statistic</h2>
+<table class="table table-bordered">
+    <thead><tr><td class="min-column"><strong>POST ID</strong></td><td><strong>POST VIEWS</strong></td><td class="min-column"><strong>POST LIKES</strong></td class="min-column"></tr></thead>
+    <tbody>
+      @foreach (var post in Model.PostStatistic)
+      {
+        <tr>
+            <td><strong>@post.ID</strong></td>
+            <td>
+                <div class="pop-up-table-header"><strong>Total post views: @post.TotalViews</strong>
+                @if (@post.TotalViews > 0)
+                {
+                <span class="btn btn-info btn-right" onclick="showTable('@("pop-up-table" + post.ID)')">Show more information ☰</span>
+                <table class="table hidden" id=@("pop-up-table" + post.ID)>
+                    <thead><tr><td><strong>View ID</strong></td><td><strong>Source URL</strong></td><td><strong>Count</strong></td></tr></thead>
+                    @foreach (var view in post.PostView)
+                    {
+                    <tbody><tr><td>@view.Id</td><td>@view.Views</td><td>@view.Count</td></tr></tbody>
+                    }
+                </table>
+                }
+                </div>
+            </td>
+            <td><strong>@post.Likes</strong></td>
+        </tr>
+      }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td><strong>TOTAL POSTS: @Model.TotalPosts</strong></td>
+            <td><strong>TOTAL VIEWS: @Model.TotalViews</strong></td>
+            <td><strong>TOTAL LIKES: @Model.TotalLikes</strong></td>
+        </tr>
+    </tfoot>
+</table>
+

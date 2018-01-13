@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using System.Threading.Tasks;
 using System.IO;
 using Xm.Trial.Models.Data;
+using Xm.Trial.Models;
 using System.Linq;
 using System.Collections.Generic;
 using Xm.Trial.Services;
@@ -68,7 +69,7 @@ namespace Xm.Trial.Controllers
                     msgBody, true, attachmentsPaths);
 
                     await _context.SaveChangesAsync();
-                    return View("Sent", feedbackMsg);
+                    return View("Sent", new ContactUsViewModel { Name = feedbackMsg.Name });
             }
 
             return View();
