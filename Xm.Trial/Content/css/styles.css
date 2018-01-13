@@ -35,15 +35,40 @@
     min-width: 100px;
 }
 
-.move{
-    width:10px;
-    height:10px;
-    border-radius:5px;
-    color: blue;
+.moved {
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    background-color: #0067b8;
+    position: absolute;
+    top: 21px;
+    left: calc(50% - 3px);
+    animation-name: move;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
+}
+
+.move-cont{
+    padding:11px;
+    position: relative;
+    min-height: 50px;
+    min-width: 150px;
+    display:none;
+    font-size: 16px;
 }
 
 .figure{
     width: 100%;
-    max-height: 50px;
-    background-color: grey;
+    text-align:center;
+    min-height: 50px;
+}
+
+@keyframes move {
+    from {
+        transform: rotateZ(0deg) translateX(15px);
+    }
+    to {
+        transform: rotateZ(360deg) translateX(15px);
+    }
 }

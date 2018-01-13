@@ -3,24 +3,29 @@
 @{
     ViewBag.Title = Model.Title;
 }
+<div id="article-cont">
+    @foreach (var post in Model.Posts)
+    {
+        var detailsUrl = Url.Action("Details", new RouteValueDictionary { ["id"] = post.Id });
 
-@foreach (var post in Model.Posts)
-{
-    var detailsUrl = Url.Action("Details", new RouteValueDictionary { ["id"] = post.Id });
+        <article id="post№@post.Id">
+            <header>
+                <h2><a href="@detailsUrl">@post.Title</a></h2>
+                @Html.Partial("PostMeta", post)
+            </header>
 
-    <article>
-        <header>
-            <h2><a href="@detailsUrl">@post.Title</a></h2>
-            @Html.Partial("PostMeta", post)
-        </header>
-        
-        <a href="@detailsUrl">
-            <figure>
-                <img src="@post.Picture" alt="@post.Title">
-                <figcaption>@post.PictureCaption</figcaption>
-            </figure>
-        </a>
+            <a href="@detailsUrl">
+                <figure>
+                    <img src="@post.Picture" alt="@post.Title">
+                    <figcaption>@post.PictureCaption</figcaption>
+                </figure>
+            </a>
 
-        <p>@post.Snippet</p>
-    </article>
-}
+            <p>@post.Snippet</p>
+        </article>
+    }
+</div>
+
+<div class="figure" id="figure"><div class="move-cont alert-info" id="move-cont"></div></div>
+
+@Scripts.Render("~/Content/js/blog/blog.js")

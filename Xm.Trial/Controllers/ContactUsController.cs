@@ -43,7 +43,7 @@ namespace Xm.Trial.Controllers
                 _context.ContactUsForms.Add(feedbackMsg);
                 await _context.SaveChangesAsync();
 
-                List<string> attachmentsPaths = new List<string>();
+                var attachmentsPaths = new List<string>();
 
                 if (screenshots.First() != null)
                 {

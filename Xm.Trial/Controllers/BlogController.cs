@@ -9,11 +9,20 @@ namespace Xm.Trial.Controllers
 {
     public class BlogController : Controller
     {
-        private readonly DataContext _db = new DataContext();
+        private readonly DataContext _context;
 
-        public async Task<ActionResult> Index()
+        public BlogController(DataContext context)
         {
-            var posts = await _db.Posts
+            _context = context;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Index(int? curId)
+        {
+            int id = (curId == null) ? 0 : curId.Value;
+
+            var posts = await _context.Posts
+                                 .OrderBy(p => p.Id)
                                  .Select(p => new PostSnippetViewModel
                                               {
                                                   Id = p.Id,
@@ -24,6 +33,8 @@ namespace Xm.Trial.Controllers
                                                   Snippet = p.Snippet,
                                                   Author = p.Author
                                               })
+                                 .Where(p => p.Id > id)
+                                 .Take(5)
                                  .ToArrayAsync();
 
             var viewModel = new BlogViewModel
@@ -31,13 +42,17 @@ namespace Xm.Trial.Controllers
                                 Title = "Posts",
                                 Posts = posts
                             };
+            if (id != 0)
+            {
+                return PartialView("_BlogPart", viewModel);
+            }
 
             return View(viewModel);
         }
 
         public async Task<ActionResult> Details(int id)
         {
-            var post = await _db.Posts
+            var post = await _context.Posts
                                 .Select(p => new PostViewModel
                                              {
                                                  Id = p.Id,
@@ -63,7 +78,7 @@ namespace Xm.Trial.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-                _db.Dispose();
+                _context.Dispose();
 
             base.Dispose(disposing);
         }

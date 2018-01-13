@@ -7,7 +7,7 @@ namespace Xm.Trial
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/Content/bundles/js")
-                .IncludeDirectory("~/Content/js/", "*.js", true));
+                .IncludeDirectory("~/Content/js/", "*.js", false));
 
             bundles.Add(new StyleBundle("~/Content/bundles/css")
                 .Include("~/Content/css/*.css"));

@@ -163,6 +163,7 @@
   <ItemGroup>
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\styles.css" />
+    <Content Include="Content\js\blog\blog.js" />
     <Content Include="Content\js\likes.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
@@ -221,6 +222,7 @@
     <Content Include="Views\ContactUs\Sent.cshtml" />
     <Content Include="appsettings.json" />
     <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Blog\_BlogPart.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
