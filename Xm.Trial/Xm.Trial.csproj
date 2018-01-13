@@ -203,6 +203,7 @@
     <Compile Include="Models\Data\PostView.cs" />
     <Compile Include="Models\Data\Post.cs" />
     <Compile Include="Models\Data\Tag.cs" />
+    <Compile Include="Models\ErrorViewModel.cs" />
     <Compile Include="Models\IPostViewModel.cs" />
     <Compile Include="Models\LikeViewModel.cs" />
     <Compile Include="Models\PostSnippetViewModel.cs" />

@@ -46,7 +46,7 @@ namespace Xm.Trial.Controllers
 
                 var attachmentsPaths = new List<string>();
 
-                if (screenshots.First() != null)
+                if (!screenshots.Any())
                 {
                     string directoryName = Server.MapPath(_appConfiguration.ContactUsData.FilesFolder + feedbackMsg.ID + "/");
                     Directory.CreateDirectory(directoryName);

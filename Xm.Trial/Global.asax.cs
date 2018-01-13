@@ -23,7 +23,7 @@ namespace Xm.Trial
         {
             Exception exception = Server.GetLastError();
             Server.ClearError();
-            Response.Redirect("~/Error");
+            Response.Redirect("~/Error?msg=" + exception.Message);
         }
     }
 }
