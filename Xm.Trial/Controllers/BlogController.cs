@@ -19,7 +19,7 @@ namespace Xm.Trial.Controllers
         [HttpGet]
         public async Task<ActionResult> Index(int? curId)
         {
-            int id = (curId == null) ? 0 : curId.Value;
+            int id = (curId == null || !Request.IsAjaxRequest()) ? 0 : curId.Value;
 
             var posts = await _context.Posts
                                  .OrderBy(p => p.Id)

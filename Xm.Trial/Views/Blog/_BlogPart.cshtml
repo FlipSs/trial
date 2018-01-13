@@ -4,7 +4,7 @@
 {
     var detailsUrl = Url.Action("Details", new RouteValueDictionary { ["id"] = post.Id });
 
-    <article id="post№@post.Id">
+    <article id="post_@post.Id">
         <header>
             <h2><a href="@detailsUrl">@post.Title</a></h2>
             @Html.Partial("PostMeta", post)

@@ -61,7 +61,7 @@
 .figure{
     width: 100%;
     text-align:center;
-    min-height: 50px;
+    min-height: 60px;
 }
 
 @keyframes move {
