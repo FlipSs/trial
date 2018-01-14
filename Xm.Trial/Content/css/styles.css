@@ -1,5 +1,23 @@
 ﻿[data-action="like"]:before { display: inline-block; margin-right: 5px; content: 'Like'; }
 
+body {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    color: #555;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+    margin-top: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    color: #333;
+}
+
+
 .message {
     min-height: 150px;
     max-width: 100%;
@@ -101,6 +119,44 @@ td{
     animation-timing-function: linear;
 }
 
+.blog-main {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.blog-post {
+    margin-bottom: 100px;
+}
+
+.blog-post-title {
+    margin-bottom: 5px;
+    font-size: 40px;
+}
+
+.blog-post-meta {
+    color: #999;
+}
+
+.author{
+    display: inline-block;
+}
+
+.post-image {
+    width: 100%;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.like-btn {
+    background-color: transparent;
+    border: 1px solid blue;
+    color: blue;
+}
+
+.like-btn:hover{
+    opacity: 0.5;
+}
+
 @keyframes move {
     from {
         transform: rotateZ(0deg) translateX(15px);
@@ -118,5 +174,11 @@ td{
     to {
         transform: translateY(0);
         opacity: 1;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 970px;
     }
 }

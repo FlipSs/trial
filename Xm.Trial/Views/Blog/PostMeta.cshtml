@@ -1,9 +1,9 @@
 ﻿@model Xm.Trial.Models.IPostViewModel
 
-<section class="post-meta">
+<section class="blog-post-meta">
+    <time datetime="@Model.Created.ToString("o")">@Model.Created.ToString("D")</time>
     @if (Model.Author != null)
             {
-        <address class="author">By <img src="@Model.Author.Avatar"> @Model.Author.Name</address>
+        <address class="author">by <a href=""><img src="@Model.Author.Avatar" width="25" height="25"> @Model.Author.Name</a></address>
     }
-    <time datetime="@Model.Created.ToString("o")">@Model.Created.ToString("D")</time>
 </section>

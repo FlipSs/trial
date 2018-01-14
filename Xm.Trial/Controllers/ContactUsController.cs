@@ -32,6 +32,7 @@ namespace Xm.Trial.Controllers
             return View();
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<ActionResult> Index(ContactUsForm feedbackMsg, IEnumerable<HttpPostedFileBase> screenshots)
         {
@@ -46,7 +47,7 @@ namespace Xm.Trial.Controllers
 
                 var attachmentsPaths = new List<string>();
 
-                if (!screenshots.Any())
+                if (screenshots.Any())
                 {
                     string directoryName = Server.MapPath(_appConfiguration.ContactUsData.FilesFolder + feedbackMsg.ID + "/");
                     Directory.CreateDirectory(directoryName);

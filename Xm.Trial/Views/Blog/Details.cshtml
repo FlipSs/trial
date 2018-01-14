@@ -3,33 +3,38 @@
 @{
     ViewBag.Title = Model.Title;
 }
+<div class="container">
+        <div class="blog-main">
+            <header>
+                <h2 class="blog-post-title">@Model.Title</h2>
+                <hr />
+            @Html.Partial("PostMeta")
+        </header>
 
-<article>
-    <header>
-        <h1>@Model.Title</h1>
-        @Html.Partial("PostMeta")
-    </header>
+        <figure>
+            <figcaption>@Model.PictureCaption</figcaption>
+            <img src="@Model.Picture" alt="@Model.Title" class="post-image">
+        </figure>
 
-    <figure>
-        <img src="@Model.Picture" alt="@Model.Title">
-        <figcaption>@Model.PictureCaption</figcaption>
-    </figure>
+        @Html.Raw(Model.Text)
 
-    @Html.Raw(Model.Text)
-       
-    <footer>
-        <p>
-            <button data-action="like" data-post-id="@Model.Id">@Model.Likes</button>
-        </p>
+        <footer>
+            <p>
+                <button data-action="like" data-post-id="@Model.Id" class="btn-right like-btn">@Model.Likes</button>
+            </p>
 
-        @if (Model.Tags?.Any() == true)
-        {
-            <small>
-                @foreach (var tag in Model.Tags)
-                {
-                    <a href="@Url.Action("Index", "Blog", new RouteValueDictionary { ["tag"] = tag.Id })" class="tag">@tag.Name</a>
-                }
-            </small>
-        }
-    </footer>
-</article>
+            @if (Model.Tags?.Any() == true)
+            {
+                <blockquote>
+                    <strong>Tags</strong>
+                    <small>
+                        @foreach (var tag in Model.Tags)
+                        {
+                            <a href="@Url.Action("Index", "Blog", new RouteValueDictionary { ["tag"] = tag.Id })" class="tag">@tag.Name</a>
+                        }
+                    </small>
+                </blockquote>
+            }
+        </footer>
+    </div>
+</div>

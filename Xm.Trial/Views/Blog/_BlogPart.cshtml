@@ -4,19 +4,19 @@
 {
     var detailsUrl = Url.Action("Details", new RouteValueDictionary { ["id"] = post.Id });
 
-    <article id="post_@post.Id">
-        <header>
-            <h2><a href="@detailsUrl">@post.Title</a></h2>
+    <div id="post_@post.Id" class="blog-post">
+            <h2 class="blog-post-title"><a href="@detailsUrl">@post.Title</a></h2>
+        <hr />
             @Html.Partial("PostMeta", post)
-        </header>
 
         <a href="@detailsUrl">
             <figure>
-                <img src="@post.Picture" alt="@post.Title">
                 <figcaption>@post.PictureCaption</figcaption>
+                <img src="@post.Picture" alt="@post.Title" class="post-image">
             </figure>
         </a>
 
         <p>@post.Snippet</p>
-    </article>
+
+    </div>
 }

@@ -2,6 +2,7 @@
     <h2>Contact us</h2>
     <br />
     <form method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
         <div class="text-danger"></div>
         <div class="form-group">
             <input class="form-control" name="Name" autofocus placeholder="Name" required />

@@ -5,11 +5,11 @@
 }
 
 <a href="/Blog/PostsStatistic" class="go-to btn btn-info">Go to the blog statistic!</a>
-
-<div id="article-cont">
-    @Html.Partial("_BlogPart", Model);
+<div class="container">
+     <div id="article-cont" class="blog-main">
+         @Html.Partial("_BlogPart", Model)
+     </div>
 </div>
-
 <div class="figure" id="figure"><div class="move-cont alert-info" id="move-cont"></div></div>
 
 @Scripts.Render("~/Content/js/blog/blog.js")
